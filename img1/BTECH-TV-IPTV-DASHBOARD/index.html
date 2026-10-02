@@ -1,0 +1,110 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="theme-color" content="#050816">
+  <title>BTECH-TV WORLD IPTV DASHBOARD</title>
+  <link rel="stylesheet" href="css/style.css">
+  <script src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script>
+</head>
+<body>
+  <aside class="sidebar">
+    <div class="brand">
+      <div class="brand-logo">BT</div>
+      <div><strong>BTECH-TV</strong><span>WORLD IPTV</span></div>
+    </div>
+
+    <button class="nav active" data-view="all">📺 All Channels</button>
+    <button class="nav" data-view="favorites">⭐ Favorites</button>
+
+    <div class="side-title">COUNTRIES</div>
+    <div id="countryList" class="side-list"></div>
+
+    <div class="side-title">CATEGORIES</div>
+    <div id="categoryList" class="side-list"></div>
+
+    <div class="side-footer">
+      <button id="reloadBtn" class="side-action">↻ Reload catalog</button>
+      <a href="https://github.com/iptv-org/iptv" target="_blank" rel="noopener">Public stream source ↗</a>
+    </div>
+  </aside>
+
+  <main class="main">
+    <header class="topbar">
+      <div class="search-wrap">
+        <span>⌕</span>
+        <input id="search" type="search" placeholder="Search channels, countries, categories...">
+      </div>
+      <div class="top-actions">
+        <button id="downloadBtn" class="primary">⬇ Download All TV</button>
+        <button id="fullscreenBtn" title="Fullscreen">⛶</button>
+      </div>
+    </header>
+
+    <section class="hero">
+      <div>
+        <div class="eyebrow">● LIVE IPTV ENGINE</div>
+        <h1>Global TV Channels</h1>
+        <p>Browse publicly available IPTV streams from around the world.</p>
+      </div>
+      <div class="hero-status"><span class="pulse"></span><span id="statusText">Loading catalog...</span></div>
+    </section>
+
+    <section class="stats">
+      <div class="stat"><span>CHANNELS</span><b id="totalStat">0</b></div>
+      <div class="stat"><span>VISIBLE</span><b id="visibleStat">0</b></div>
+      <div class="stat"><span>FAVORITES</span><b id="favStat">0</b></div>
+      <div class="stat"><span>COUNTRIES</span><b id="countryStat">0</b></div>
+    </section>
+
+    <section class="workspace">
+      <div class="player-card">
+        <div class="player-head">
+          <div>
+            <span class="live-dot">LIVE</span>
+            <strong id="nowTitle">Select a channel</strong>
+          </div>
+          <button id="closePlayer" class="ghost">Clear</button>
+        </div>
+        <div class="player">
+          <video id="video" controls playsinline></video>
+          <div id="playerEmpty" class="player-empty">
+            <div class="big-tv">📺</div>
+            <strong>Select a channel to start playback</strong>
+            <small>Some streams may be geo-blocked, offline, or require a supported browser.</small>
+          </div>
+        </div>
+        <div class="player-info">
+          <span id="nowMeta">No channel selected</span>
+          <button id="copyStream" class="ghost" disabled>Copy stream URL</button>
+        </div>
+      </div>
+
+      <div class="filters-card">
+        <div class="filter-row">
+          <select id="countryFilter"><option value="">All countries</option></select>
+          <select id="categoryFilter"><option value="">All categories</option></select>
+          <select id="languageFilter"><option value="">All languages</option></select>
+          <select id="qualityFilter">
+            <option value="">Any quality</option>
+            <option value="4K">4K</option><option value="1080">1080p+</option>
+            <option value="720">720p+</option><option value="480">480p+</option>
+          </select>
+        </div>
+        <div class="result-bar">
+          <strong>Channel directory</strong>
+          <span id="resultText">0 channels</span>
+        </div>
+      </div>
+
+      <section id="grid" class="grid"></section>
+      <div id="empty" class="empty" hidden>No channels match the current filters.</div>
+      <button id="loadMore" class="load-more" hidden>Load more</button>
+    </section>
+  </main>
+
+  <div id="toast" class="toast"></div>
+  <script src="js/app.js"></script>
+</body>
+</html>
